@@ -1,0 +1,41 @@
+package com.daisx.demo.neo4j.domain.model;
+
+import lombok.Data;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Id;
+import org.springframework.data.neo4j.core.schema.Property;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+/**
+ * @author daisx
+ */
+@Data
+public class AbstractNode implements Serializable {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Property("unique_code")
+    private String uniqueCode;
+
+    @Property("name")
+    private String name;
+
+    @Property("desc")
+    private String desc;
+
+    @Property("created_time")
+    private LocalDateTime createdTime;
+
+    @Property("updated_time")
+    private LocalDateTime updatedTime;
+
+    @Property("created_by")
+    private String createdBy;
+
+    @Property("updated_by")
+    private String updatedBy;
+}
