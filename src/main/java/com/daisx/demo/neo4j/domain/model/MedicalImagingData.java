@@ -1,7 +1,6 @@
 package com.daisx.demo.neo4j.domain.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 
@@ -9,7 +8,10 @@ import org.springframework.data.neo4j.core.schema.Property;
  * @author daisx
  */
 @EqualsAndHashCode(callSuper = true)
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Node("medical-imaging-data")
 public class MedicalImagingData extends MedicalDataNode {
 

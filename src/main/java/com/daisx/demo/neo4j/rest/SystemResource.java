@@ -33,7 +33,6 @@ public class SystemResource {
         }
     }
 
-
     @GetMapping("/find/{key}")
     public List<MedicalImagingDataDto> find(@PathVariable("key") String key) {
         return dataRepository.findByUniqueCode(key);

@@ -13,11 +13,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Setter
 @Getter
-public class MedicalImagingDataDto implements Serializable {
+public class MedicalImagingLabelDto implements Serializable {
 
     private Long id;
 
-    private String uniqueCode;
+    private String uniqueKey;
 
     private String name;
 
@@ -31,20 +31,8 @@ public class MedicalImagingDataDto implements Serializable {
 
     private String updatedBy;
 
-    private String format;
+    private String key;
 
-    private String size;
-
-    private String type;
-
-    private String status;
-
-    private String origin;
-
-    private String mark;
-
-    private String parse;
-
-    private String thumbnail;
+    private String vale;
 
 }

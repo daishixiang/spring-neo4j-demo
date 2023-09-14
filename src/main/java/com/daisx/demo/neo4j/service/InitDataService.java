@@ -45,8 +45,8 @@ public class InitDataService {
         dataSource.setArea(areaList.get(i % 8));
         dataSource.setType(typeList.get(i % 2));
         dataSource.setChannel(channelList.get(i % 8));
-        dataSource.setUniqueCode("source_100" + i);
-        dataSource.setName("数据源100" + i);
+        dataSource.setUniqueKey("source_" + i);
+        dataSource.setName("数据源_" + i);
         dataSource.setDesc("测试数据");
         dataSource.setCreatedBy("admin");
         dataSource.setCreatedTime(LocalDateTime.now());
@@ -54,17 +54,17 @@ public class InitDataService {
         for (int j = 1; j < keyList.size() + 1; j++) {
             MedicalImagingLabel label = new MedicalImagingLabel();
             label.setKey(keyList.get(j % 5));
-            label.setUniqueCode("label_200" + i + j);
-            label.setName("标签200" + i + j);
+            label.setUniqueKey("label_" + i + j);
+            label.setName(keyList.get(j % 5)+"_" + i + j);
             label.setDesc("测试数据");
             label.setCreatedBy("admin");
             label.setCreatedTime(LocalDateTime.now());
-            dataSource.pointToMedicalDataset(label);
+            dataSource.pointToDataset(label);
             log.info("标签1_{}->data", j);
-            for (int f = 1; f < 301; f++) {
+            for (int f = 1; f < 2; f++) {
                 MedicalImagingData data = new MedicalImagingData();
-                data.setUniqueCode("data_990" + i + j + f);
-                data.setName("影像数据990" + i + j + f);
+                data.setUniqueKey("data_" + i + j + f);
+                data.setName("影像数据_" + i + j + f);
                 data.setDesc("测试数据");
                 data.setCreatedBy("admin");
                 data.setCreatedTime(LocalDateTime.now());
@@ -72,8 +72,8 @@ public class InitDataService {
                 data.setFormat("dicom");
                 data.setStatus("success");
                 data.setType("CT");
-                data.setOrigin("/medical-imaging/影像数据990" + i + j + f + ".dicom");
-                label.pointToMedicalData(data);
+                data.setOrigin("/medical-imaging/影像数据" + i + j + f + ".dicom");
+                label.out(data);
             }
             List<String> valList = valueList.get(j % 5);
             int size = valList.size();
@@ -81,16 +81,16 @@ public class InitDataService {
             for (int h = 1; h < size + 1; h++) {
                 MedicalImagingLabel label2 = new MedicalImagingLabel();
                 label2.setKey(valList.get(h % size));
-                label2.setUniqueCode("label_210" + i + j + h);
-                label2.setName("标签210" + i + j + h);
+                label2.setUniqueKey("label_2" + i + j + h);
+                label2.setName(valList.get(h % size)+"_" + i + j + h);
                 label2.setDesc("测试数据");
                 label2.setCreatedBy("admin");
                 label2.setCreatedTime(LocalDateTime.now());
-                label.pointToMedicalDataset(label2);
-                for (int k = 1; k < 501; k++) {
+                label.pointToDataset(label2);
+                for (int k = 1; k < 3; k++) {
                     MedicalImagingData data = new MedicalImagingData();
-                    data.setUniqueCode("data_999" + i + j + h + k);
-                    data.setName("影像数据900" + i + j + h + k);
+                    data.setUniqueKey("data_" + i + j + h + k);
+                    data.setName("影像数据" + i + j + h + k);
                     data.setDesc("测试数据");
                     data.setCreatedBy("admin");
                     data.setCreatedTime(LocalDateTime.now());
@@ -98,8 +98,8 @@ public class InitDataService {
                     data.setFormat("dicom");
                     data.setStatus("success");
                     data.setType("CT");
-                    data.setOrigin("/medical-imaging/影像数据900" + i + j + h + k + ".dicom");
-                    label2.pointToMedicalData(data);
+                    data.setOrigin("/medical-imaging/影像数据" + i + j + h + k + ".dicom");
+                    label2.out(data);
                 }
             }
             dataSourceRepository.save(dataSource);

@@ -1,9 +1,6 @@
 package com.daisx.demo.neo4j.domain.model;
 
-import lombok.Data;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
-import org.springframework.data.neo4j.core.schema.Property;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -11,15 +8,18 @@ import java.time.LocalDateTime;
 /**
  * @author daisx
  */
-@Data
-public class AbstractNode implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+public class BaseNode implements Serializable {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Property("unique_code")
-    private String uniqueCode;
+    @Property("unique_key")
+    private String uniqueKey;
 
     @Property("name")
     private String name;

@@ -1,7 +1,6 @@
 package com.daisx.demo.neo4j.domain.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
@@ -12,9 +11,12 @@ import java.util.List;
  * @author daisx
  */
 @EqualsAndHashCode(callSuper = true)
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Node("medical-dataset")
-public class MedicalDatasetNode extends AbstractNode {
+public class MedicalDatasetNode extends BaseNode implements BaseRelationship<MedicalDatasetNode,MedicalDataNode>{
 
     // 定义一个关系，注意：direction代表箭头方向，INCOMING箭头指向自己，OUTGOING箭头指向TargetNode
     @Relationship(type = "SUBSET", direction = Relationship.Direction.OUTGOING)
@@ -22,36 +24,28 @@ public class MedicalDatasetNode extends AbstractNode {
 
     // 定义一个关系，注意：direction代表箭头方向，INCOMING箭头指向自己，OUTGOING箭头指向TargetNode
     @Relationship(type = "SUBSET", direction = Relationship.Direction.INCOMING)
-    private List<MedicalDatasetNode> subsets = new ArrayList<>();
+    private List<MedicalDatasetNode> datasets = new ArrayList<>();
 
     // 定义一个关系，注意：direction代表箭头方向，INCOMING箭头指向自己，OUTGOING箭头指向TargetNode
     @Relationship(type = "ELEMENT", direction = Relationship.Direction.OUTGOING)
-    private List<MedicalDataNode> elements = new ArrayList<>();
-
-    /**
-     * this -> 医疗数据
-     *
-     * @param data 医疗数据
-     */
-    public void pointToMedicalData(MedicalDataNode data) {
-        elements.add(data);
-    }
-
-    /**
-     * 医疗数据集  -> this
-     *
-     * @param dataset 医疗数据集
-     */
-    public void pointToMe(MedicalDatasetNode dataset) {
-        subsets.add(dataset);
-    }
+    private List<MedicalDataNode> datas = new ArrayList<>();
 
     /**
      * this -> 医疗数据集
      *
      * @param dataset 医疗数据集
      */
-    public void pointToMedicalDataset(MedicalDatasetNode dataset) {
+    public void pointToDataset(MedicalDatasetNode dataset) {
         toSubsets.add(dataset);
+    }
+
+    @Override
+    public void in(MedicalDatasetNode dataset) {
+        datasets.add(dataset);
+    }
+
+    @Override
+    public void out(MedicalDataNode data) {
+        datas.add(data);
     }
 }
