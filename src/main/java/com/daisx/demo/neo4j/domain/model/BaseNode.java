@@ -1,6 +1,9 @@
 package com.daisx.demo.neo4j.domain.model;
 
 import lombok.*;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Id;
+import org.springframework.data.neo4j.core.schema.Property;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
